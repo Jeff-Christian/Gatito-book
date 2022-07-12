@@ -2,19 +2,19 @@
 <a routerLink="login">Login</a>
 <h4 class="text-center">Cadastro: </h4>
 
-<form class="form mt-4">
+<form class="form mt-4" [formGroup]="newUserForm" (ngSubmit)="register()" #registerForm="ngForm">
   <div class="form-group">
-    <input type="email" placeholder="seu melhor email" class="form-control">
+    <input type="email" placeholder="seu melhor email" class="form-control" formControlName="email" required>
   </div>
   <div class="form-group">
-    <input type="text" placeholder="Nome Completo" class="form-control">
+    <input type="text" placeholder="Nome Completo" class="form-control" formControlName="fullName" required>
   </div>
   <div class="form-group">
-    <input type="text" placeholder="Nome de Usuário" class="form-control">
+    <input type="text" placeholder="Nome de Usuário" class="form-control" formControlName="userName" required>
   </div>
   <div class="form-group">
-    <input type="password" placeholder="sua senha" class="form-control">
+    <input type="password" placeholder="sua senha" class="form-control" formControlName="password" required>
   </div>
-  <button class="btn btn-primary btn-block">Registre-se</button>
+  <button class="btn btn-primary btn-block" [disabled]="registerForm.invalid">Registre-se</button>
 </form>
 <p>Já está cadastrado? <a routerLink="">Login</a></p>
