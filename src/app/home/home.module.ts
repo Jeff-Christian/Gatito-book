@@ -5,12 +5,14 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     LoginComponent,
+    CreateUserComponent,
   ],
   imports: [
     CommonModule,
