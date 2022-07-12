@@ -4,10 +4,13 @@
 
 <form class="form mt-4" [formGroup]="newUserForm" (ngSubmit)="register()" #registerForm="ngForm">
   <div class="form-group">
-    <input type="email" placeholder="seu melhor email" class="form-control" formControlName="email" required>
+    <input type="email" placeholder="seu melhor email" class="form-control" formControlName="email" >
+    <app-mensagem *ngIf="newUserForm.get('email')?.errors?.['required'] && newUserForm.get('email')?.touched" mensagem="Email obrigatório"></app-mensagem>
+    <app-mensagem *ngIf="newUserForm.get('email')?.errors?.['email'] && newUserForm.get('email')?.touched" mensagem="Email no formato incorreto"></app-mensagem>
   </div>
   <div class="form-group">
     <input type="text" placeholder="Nome Completo" class="form-control" formControlName="fullName" required>
+    <app-mensagem *ngIf="newUserForm.get('fullName')?.errors && newUserForm.get('fullName')?.touched" mensagem="Nome incorreto"></app-mensagem>
   </div>
   <div class="form-group">
     <input type="text" placeholder="Nome de Usuário" class="form-control" formControlName="userName" required>
