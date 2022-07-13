@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NewUser } from './new-user';
 import { lowerValidator } from './lower.validator';
+import { userPasswordsSameValidator }  from './identical-passwords.validator';
 
 @Component({
   selector: 'app-create-user',
@@ -27,6 +28,8 @@ export class CreateUserComponent implements OnInit {
       fullName: ['', [Validators.required, Validators.minLength(4)]],
       userName: ['', [lowerValidator], [this.userExistsService.userExists()]],
       password: [''],
+    }, {
+      validators: [userPasswordsSameValidator]
     });
   }
 
