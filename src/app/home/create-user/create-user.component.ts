@@ -1,3 +1,4 @@
+import { UserExistsService } from './user-exists.service';
 import { NewUserService } from './new-user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,6 +17,7 @@ export class CreateUserComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private NewUserService: NewUserService,
+    private userExistsService: UserExistsService,
   ) { }
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class CreateUserComponent implements OnInit {
     this.newUserForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       fullName: ['', [Validators.required, Validators.minLength(4)]],
-      userName: ['', [lowerValidator]],
+      userName: ['', [lowerValidator], [this.userExistsService.userExists()]],
       password: [''],
     });
   }
