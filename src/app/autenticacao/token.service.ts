@@ -15,7 +15,7 @@ export class TokenService {
     localStorage.setItem(KEY, token)
   }
 
-  logOut(){
+  deleteToken(){
     localStorage.removeItem(KEY);
   }
 
