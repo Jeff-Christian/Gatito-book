@@ -2,6 +2,7 @@ import { UserExistsService } from './user-exists.service';
 import { NewUserService } from './new-user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NewUser } from './new-user';
 import { lowerValidator } from './lower.validator';
 import { userPasswordsSameValidator }  from './identical-passwords.validator';
@@ -19,6 +20,7 @@ export class CreateUserComponent implements OnInit {
     private formBuilder: FormBuilder,
     private NewUserService: NewUserService,
     private userExistsService: UserExistsService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -34,8 +36,19 @@ export class CreateUserComponent implements OnInit {
   }
 
   register(){
-    const newUser = this.newUserForm.getRawValue() as NewUser;
-    console.log(newUser);
+
+    if (this.newUserForm.valid) {
+      const newUser = this.newUserForm.getRawValue() as NewUser;
+      console.log(newUser);
+      this.NewUserService.signUp(newUser).subscribe(
+        () => {
+          this.router.navigate(['']);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
 }
