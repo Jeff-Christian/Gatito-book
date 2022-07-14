@@ -1,3 +1,6 @@
+import { PostagensService } from './../postagens.service';
+import { UserService } from './../../autenticacao/user/user.service';
+import { Postagens, Publicacao } from './../postagens';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GridComponent implements OnInit {
 
-  constructor() { }
+  postagens!: Postagens
+
+  constructor(
+    private userService: UserService,
+    private postagensService: PostagensService
+  ) { }
 
   ngOnInit(): void {
+
+    this.userService.returnUser().subscribe((user) => {
+      const userName = user.name ?? '';
+      this.postagensService.postsUser(userName).subscribe((postagens) => {
+        this.postagens = postagens;
+      })
+    })
+
   }
 
 }

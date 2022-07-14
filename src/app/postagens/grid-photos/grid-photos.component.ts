@@ -1,4 +1,4 @@
-import { Postagens } from './../postagens';
+import { Publicacao, Postagens } from './../postagens';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
