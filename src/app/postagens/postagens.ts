@@ -1,4 +1,4 @@
-export interface Post {
+export interface Publicacao {
   id: number;
   postDate: Date;
   url: string;
@@ -9,4 +9,4 @@ export interface Post {
   userId: number;
 }
 
-export type Postagens = Array<Post>;
+export type Postagens = Array<Publicacao>;

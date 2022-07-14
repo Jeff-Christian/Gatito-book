@@ -1,0 +1,15 @@
+<p class="text-center text-muted" *ngIf="!postagens.length">No momento nada foi publicado!</p>
+
+<div class="row">
+  <div class="col-4" *ngFor="let publicacao of postagens">
+    <a routerLink="['/postagens', post.id]"></a>
+    <app-card>
+      <app-publicacao>
+        [url]="publicacao.url"
+        [descricao]="publicacao.description"
+      </app-publicacao>
+      <i aria-hidden="true" class="fa fa-heart-o fa-1x mr-2"> {{ publicacao.likes }} </i>
+      <i aria-hidden="true" class="fa fa-comment-o fa-1x mr-2 ml-2"> {{ publicacao.comments }} </i>
+    </app-card>
+  </div>
+</div>
