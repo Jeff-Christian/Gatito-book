@@ -1,1 +1,4 @@
-<app-grid-photos [postagens]="postagens"></app-grid-photos>
+
+<div *ngIf="postagens$ | async as postagens">
+  <app-grid-photos [postagens]="postagens"></app-grid-photos>
+</div>

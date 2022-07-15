@@ -1,7 +1,9 @@
+import { switchMap } from 'rxjs/operators';
 import { PostagensService } from './../postagens.service';
 import { UserService } from './../../autenticacao/user/user.service';
 import { Postagens, Publicacao } from './../postagens';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-grid',
@@ -10,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GridComponent implements OnInit {
 
-  postagens!: Postagens
+  postagens$ !: Observable<Postagens>;
 
   constructor(
     private userService: UserService,
@@ -18,13 +20,12 @@ export class GridComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.userService.returnUser().subscribe((user) => {
-      const userName = user.name ?? '';
-      this.postagensService.postsUser(userName).subscribe((postagens) => {
-        this.postagens = postagens;
+    this.postagens$ = this.userService.returnUser().pipe(
+      switchMap((usuario) => {
+        const userName = usuario.name ?? '';
+        return this.postagensService.postsUser(userName);
       })
-    })
+    )
 
   }
 
